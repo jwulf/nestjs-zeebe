@@ -9,7 +9,7 @@ Using the zeebe-node module and exposing it as a NestJS transport and module.
 
 <p align="center">
   
-[![Build Status](https://dev.azure.com/payk/PayK/_apis/build/status/pay-k.nestjs-zeebe?branchName=master)](https://dev.azure.com/payk/PayK/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://dev.azure.com/payk/PayK%20Public/_apis/build/status/pay-k.nestjs-zeebe?branchName=master)](https://dev.azure.com/payk/PayK%20Public/_build/latest?definitionId=1&branchName=master)
 
 </p>
 
@@ -59,7 +59,7 @@ Using the zeebe-node module and exposing it as a NestJS transport and module.
     import { Controller, Get, Inject } from '@nestjs/common';
     import { AppService } from './app.service';
     import { ZBClient } from 'zeebe-node';
-    import { CreateWorkflowInstanceResponse, CompleteFn } from 'zeebe-node/interfaces';
+    import { CreateWorkflowInstanceResponse, CompleteFn, Job } from 'zeebe-node/interfaces';
     import { ZEEBE_CONNECTION_PROVIDER, ZeebeWorker } from '@payk/nestjs-zeebe';
 
     @Controller()
@@ -74,7 +74,7 @@ Using the zeebe-node module and exposing it as a NestJS transport and module.
 
         // Subscribe to events of type 'payment-service
         @ZeebeWorker('payment-service')
-        paymentService(job, complete) {
+        paymentService(job: Job, complete: CompleteFn) {
             console.log('Payment-service, Task variables', job.variables);
             let updatedVariables = Object.assign({}, job.variables, {
             paymentService: 'Did my job',
@@ -87,7 +87,7 @@ Using the zeebe-node module and exposing it as a NestJS transport and module.
 
         // Subscribe to events of type 'inventory-service and create a worker with the options as passed below (zeebe-node ZBWorkerOptions)
         @ZeebeWorker('inventory-service', { maxJobsToActivate: 10, timeout: 300 })
-        inventoryService(job, complete) {
+        inventoryService(job: Job, complete: CompleteFn) {
             console.log('inventory-service, Task variables', job.variables);
             let updatedVariables = Object.assign({}, job.variables, {
             inventoryVar: 'Inventory donnnneee',
