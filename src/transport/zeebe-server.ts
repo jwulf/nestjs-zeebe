@@ -12,7 +12,7 @@ import {
 } from '../zeebe.constans';
 import {
   ZBClient
-} from 'zeebe-node';
+} from 'zeebe-node-next';
 import * as process from 'process';
 import {
   ZeebeWorkerProperties

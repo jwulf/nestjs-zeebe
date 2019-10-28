@@ -1,6 +1,6 @@
 {
-  "name": "@payk/nestjs-zeebe",
-  "version": "1.2.0",
+  "name": "@magikcraft/nestjs-zeebe",
+  "version": "1.2.1",
   "description": "Zeebe microservice module and client for nestjs",
   "main": "dist/index.js",
   "repository": {
@@ -29,7 +29,8 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",
     "typescript": "^3.6.3",
-    "zeebe-node": "^0.21.2"
+    "zeebe-node": "^0.21.2",
+    "zeebe-node-next": "^0.21.3"
   },
   "devDependencies": {
     "@nestjs/testing": "^6.7.1",

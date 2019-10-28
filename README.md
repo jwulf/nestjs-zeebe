@@ -58,7 +58,7 @@ Using the zeebe-node module and exposing it as a NestJS transport and module.
     // app.controller.ts
     import { Controller, Get, Inject } from '@nestjs/common';
     import { AppService } from './app.service';
-    import { ZBClient } from 'zeebe-node';
+    import { ZBClient } from 'zeebe-node-next';
     import { CreateWorkflowInstanceResponse, CompleteFn, Job } from 'zeebe-node/interfaces';
     import { ZEEBE_CONNECTION_PROVIDER, ZeebeWorker } from '@payk/nestjs-zeebe';
 
