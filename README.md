@@ -3,6 +3,9 @@
 </p>
 
 # NestJS Zeebe Connector (Transport and Client)
+
+_This version of the package tracks `zeebe-node-next` and is used for testing incoming changes to the library._
+
 A zeebe transport and client for NestJS
 
 Using the zeebe-node module and exposing it as a NestJS transport and module.
