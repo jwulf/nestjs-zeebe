@@ -4,7 +4,7 @@
 
 # NestJS Zeebe Connector (Transport and Client)
 
-_This version of the package tracks `zeebe-node-next` and is used for testing incoming changes to the library._
+_This version of the package tracks `zeebe-node` and is used for testing incoming changes to the library._
 
 A zeebe transport and client for NestJS
 
@@ -61,7 +61,7 @@ Using the zeebe-node module and exposing it as a NestJS transport and module.
     // app.controller.ts
     import { Controller, Get, Inject } from '@nestjs/common';
     import { AppService } from './app.service';
-    import { ZBClient } from 'zeebe-node-next';
+    import { ZBClient } from 'zeebe-node';
     import { CreateWorkflowInstanceResponse, CompleteFn, Job } from 'zeebe-node/interfaces';
     import { ZEEBE_CONNECTION_PROVIDER, ZeebeWorker } from '@payk/nestjs-zeebe';
     import {

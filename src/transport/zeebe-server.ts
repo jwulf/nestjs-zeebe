@@ -12,7 +12,7 @@ import {
 } from '../zeebe.constans';
 import {
   ZBClient
-} from 'zeebe-node-next';
+} from 'zeebe-node';
 import * as process from 'process';
 import {
   ZeebeWorkerProperties
@@ -61,7 +61,7 @@ export class ZeebeServer extends Server implements CustomTransportStrategy {
         workerOptions.id = `${workerOptions.taskType}_${process.pid}`;
         const zbWorker = this.client.createWorker(workerOptions.id, workerOptions.taskType, workerOptions.handler, workerOptions.options);
       } catch (ex) {
-        
+
       }
     });
   }
