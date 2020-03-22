@@ -1,4 +1,4 @@
-import { ZBWorkerOptions, ZBClientOptions } from "zeebe-node-next";
+import { ZBWorkerOptions, ZBClientOptions } from "zeebe-node";
 
 /**
  *
