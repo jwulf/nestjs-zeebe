@@ -1,22 +1,9 @@
-import {
-  Server,
-  CustomTransportStrategy
-} from '@nestjs/microservices';
-import {
-  Inject,
-  Injectable,
-  Logger
-} from '@nestjs/common';
-import {
-  ZEEBE_CONNECTION_PROVIDER
-} from '../zeebe.constans';
-import {
-  ZBClient
-} from 'zeebe-node';
-import * as process from 'process';
-import {
-  ZeebeWorkerProperties
-} from '../zeebe.interfaces';
+import { Server, CustomTransportStrategy } from "@nestjs/microservices";
+import { Inject, Injectable, Logger } from "@nestjs/common";
+import { ZEEBE_CONNECTION_PROVIDER } from "../zeebe.constans";
+import { ZBClient } from "zeebe-node-next";
+import * as process from "process";
+import { ZeebeWorkerProperties } from "../zeebe.interfaces";
 
 /**
  * A customer transport for Zeebe.
@@ -28,7 +15,9 @@ import {
  */
 @Injectable()
 export class ZeebeServer extends Server implements CustomTransportStrategy {
-  constructor(@Inject(ZEEBE_CONNECTION_PROVIDER) private readonly client: ZBClient) {
+  constructor(
+    @Inject(ZEEBE_CONNECTION_PROVIDER) private readonly client: ZBClient
+  ) {
     super();
   }
 
@@ -38,19 +27,19 @@ export class ZeebeServer extends Server implements CustomTransportStrategy {
   }
 
   public close() {
-    this.client.close().then(() => console.log('All workers closed'))
+    this.client.close().then(() => console.log("All workers closed"));
   }
 
   private init(): void {
     const handlers = this.getHandlers();
     handlers.forEach((value, key: any, map) => {
       let workerOptions = {
-        id: '',
-        taskType: '',
+        id: "",
+        taskType: "",
         handler: value,
         options: {},
         onConnectionError: undefined
-      }
+      };
       let jsonKey: ZeebeWorkerProperties = null;
       // See if it's a json, if so use it's data
       try {
@@ -59,10 +48,13 @@ export class ZeebeServer extends Server implements CustomTransportStrategy {
         workerOptions.options = jsonKey.options || {};
 
         workerOptions.id = `${workerOptions.taskType}_${process.pid}`;
-        const zbWorker = this.client.createWorker(workerOptions.id, workerOptions.taskType, workerOptions.handler, workerOptions.options);
-      } catch (ex) {
-
-      }
+        const zbWorker = this.client.createWorker(
+          workerOptions.id,
+          workerOptions.taskType,
+          workerOptions.handler,
+          workerOptions.options
+        );
+      } catch (ex) {}
     });
   }
 }

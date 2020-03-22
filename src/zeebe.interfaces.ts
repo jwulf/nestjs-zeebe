@@ -1,4 +1,4 @@
-import { ZBWorkerOptions, ZBClientOptions } from "zeebe-node/interfaces";
+import { ZBWorkerOptions, ZBClientOptions } from "zeebe-node-next";
 
 /**
  *
@@ -7,8 +7,8 @@ import { ZBWorkerOptions, ZBClientOptions } from "zeebe-node/interfaces";
  * @interface ZeebeWorkerProperties
  */
 export interface ZeebeWorkerProperties {
-    type: string;
-    options?: ZBWorkerOptions;
+  type: string;
+  options?: ZBWorkerOptions<any>;
 }
 
 /**
@@ -18,8 +18,8 @@ export interface ZeebeWorkerProperties {
  * @interface ZeebeClientOptions
  */
 export interface ZeebeClientOptions {
-    gatewayAddress?: string;
-    options?: ZBWorkerOptions & ZBClientOptions;
+  gatewayAddress?: string;
+  options?: ZBWorkerOptions<any> & ZBClientOptions;
 }
 
 /**
@@ -29,9 +29,9 @@ export interface ZeebeClientOptions {
  * @interface ZeebeAsyncOptions
  */
 export interface ZeebeAsyncOptions {
-    imports?: any[];
-    inject?: any[];
-    useFactory?: (
-        ...args: any[]
-    ) => Promise<ZeebeClientOptions> | ZeebeClientOptions;
+  imports?: any[];
+  inject?: any[];
+  useFactory?: (
+    ...args: any[]
+  ) => Promise<ZeebeClientOptions> | ZeebeClientOptions;
 }

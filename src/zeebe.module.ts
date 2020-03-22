@@ -1,12 +1,21 @@
-import { Module, OnModuleDestroy, DynamicModule, Provider, Logger } from '@nestjs/common';
-import * as ZB from 'zeebe-node';
-import { ModuleRef } from '@nestjs/core';
-import { ZEEBE_OPTIONS_PROVIDER, ZEEBE_CONNECTION_PROVIDER } from './zeebe.constans';
-import { ZeebeClientOptions, ZeebeAsyncOptions } from './zeebe.interfaces';
+import {
+  Module,
+  OnModuleDestroy,
+  DynamicModule,
+  Provider,
+  Logger
+} from "@nestjs/common";
+import * as ZB from "zeebe-node";
+import { ModuleRef } from "@nestjs/core";
+import {
+  ZEEBE_OPTIONS_PROVIDER,
+  ZEEBE_CONNECTION_PROVIDER
+} from "./zeebe.constans";
+import { ZeebeClientOptions, ZeebeAsyncOptions } from "./zeebe.interfaces";
 
 @Module({})
 export class ZeebeModule implements OnModuleDestroy {
-  constructor(private readonly moduleRef: ModuleRef) { }
+  constructor(private readonly moduleRef: ModuleRef) {}
 
   public static forRoot(options: ZeebeClientOptions): DynamicModule {
     const optionsProviders: Provider[] = [];
@@ -18,11 +27,8 @@ export class ZeebeModule implements OnModuleDestroy {
 
     return {
       module: ZeebeModule,
-      providers: [
-        ...optionsProviders,
-        ...connectionProviders,
-      ],
-      exports: connectionProviders,
+      providers: [...optionsProviders, ...connectionProviders],
+      exports: connectionProviders
     };
   }
 
@@ -37,24 +43,24 @@ export class ZeebeModule implements OnModuleDestroy {
         {
           provide: ZEEBE_OPTIONS_PROVIDER,
           useFactory: options.useFactory,
-          inject: options.inject || [],
+          inject: options.inject || []
         },
-        ...connectionProviders,
+        ...connectionProviders
       ],
-      exports: connectionProviders,
+      exports: connectionProviders
     };
   }
 
   public static forFeature(): DynamicModule {
     return {
-      module: ZeebeModule,
+      module: ZeebeModule
     };
   }
 
   private static createOptionsProvider(options: ZeebeClientOptions): Provider {
     return {
       provide: ZEEBE_OPTIONS_PROVIDER,
-      useValue: options,
+      useValue: options
     };
   }
 
@@ -62,11 +68,12 @@ export class ZeebeModule implements OnModuleDestroy {
     return {
       provide: ZEEBE_CONNECTION_PROVIDER,
       //TODO resolve host url: do I need to? Seems to work aready? Just verify
-      useFactory: async (config: ZeebeClientOptions) => new ZB.ZBClient(config.gatewayAddress, config.options),
-      inject: [ZEEBE_OPTIONS_PROVIDER],
+      useFactory: async (config: ZeebeClientOptions) =>
+        new ZB.ZBClient(config.gatewayAddress, config.options),
+      inject: [ZEEBE_OPTIONS_PROVIDER]
     };
   }
   onModuleDestroy() {
-    Logger.error('Zeebe Module destroyed')
+    Logger.error("Zeebe Module destroyed");
   }
 }
