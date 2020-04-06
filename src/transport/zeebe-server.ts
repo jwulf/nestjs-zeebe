@@ -1,7 +1,7 @@
 import { Server, CustomTransportStrategy } from "@nestjs/microservices";
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ZEEBE_CONNECTION_PROVIDER } from "../zeebe.constans";
-import { ZBClient } from "zeebe-node-next";
+import { ZBClient } from "zeebe-node";
 import * as process from "process";
 import { ZeebeWorkerProperties } from "../zeebe.interfaces";
 

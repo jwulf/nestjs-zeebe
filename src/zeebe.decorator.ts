@@ -1,6 +1,6 @@
 import { ZeebeExceptionFilter } from "./zeebe.exception.filter";
 import { MessagePattern } from "@nestjs/microservices";
-import { ZBWorkerOptions } from "zeebe-node-next";
+import { ZBWorkerOptions } from "zeebe-node";
 import { UseFilters } from "@nestjs/common";
 
 export /**
